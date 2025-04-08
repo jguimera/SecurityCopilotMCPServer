@@ -1,0 +1,7 @@
+{
+    "mcpServers": {
+      "SecurityCopilot-MCP-Server1.0": {
+        "url": "http://localhost:8000/sse"
+      }
+    }
+  }
