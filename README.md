@@ -57,7 +57,8 @@ The next features will include:
    SENTINEL_RESOURCE_GROUP=your_resource_group
    SENTINEL_WORKSPACE_NAME=your_workspace_name
    SENTINEL_WORKSPACE_ID=your_workspace_id
-   AUTHENTICATION_TYPE=interactive  # Options: interactive, client_secret
+   #Authentication Options: interactive, client_secret
+   AUTHENTICATION_TYPE=interactive
    ```
 
 ## Usage
