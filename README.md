@@ -38,8 +38,8 @@ The next features will include:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/security-copilot-mcp.git
-   cd security-copilot-mcp
+   git clone https://github.com/jguimera/SecurityCopilotMCPServer.git
+   cd SecurityCopilotMCPServer
    ```
 
 2. Install dependencies:
