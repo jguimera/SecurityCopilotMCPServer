@@ -1,0 +1,26 @@
+# Security Copilot and Sentinel Integration Guidelines
+
+This project is focused on developting and testing components for Microsoft Security Copilot. 
+
+When working with Microsoft Security Copilot functionality:
+
+1. The terms "plugin," "skill," and "skillset" all refer to Microsoft Security Copilot components.
+
+2. In the Security Copilot architecture, "skillset" and "plugin" are equivalent terms.
+
+3. For skill testing:
+   - Identify Sentinel KQL skills looking at the SkillSet Format and Target fields. 
+   - To test Sentinel KQL skills use the appropriate Sentinel KQL query MCP tool. Show the results of the KQL execution after running the tool.
+   - If required input parameters are missing, please request them to the user. Only parameters inside Ipunts sections are needed, the ones in Settings are already set inside the platform. For the input parameters values always use String type.
+   - If asked to test a skill inside Security Copilot run a prompt in for the selected skill using the run prompt skill. Show the results of the prompt to allow user validation. Considering reformating the output to enhance user experience.
+   - IF asked to run a full test and deploy a particular skill this is the process you need to follow: 
+      1. Extract the KQL query from the Yaml File
+      2. Run the KQL query in Sentinel with the appropriate Sentinel KQL query MCP tool. Display a summary of the results. 
+      3. Validate that the results match with the description of the Skill and the intent of the KQL query.
+      4. If the previous validation is successful, Upload or Update the Skill in Security Copilot following the intruction below.
+      5. Run a Prompt to test the Skill inside Security Copilot.
+      6. Create a summary of the resting , the validation and the results. I need to understand if the SKill does what it is suposed to do , if the deployment was sucessfull and if the prompt results align with the initial test.
+
+4. To deploy, update, or upload a skill/skillset/plugin:
+   - Use the appropriate plugin Upload tool
+   - Include the complete YAML file content as input for the deployment process
