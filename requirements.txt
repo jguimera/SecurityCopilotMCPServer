@@ -1,0 +1,6 @@
+azure-identity
+azure-monitor-query
+pyyaml
+msgraph-sdk
+python-dotenv
+pandas
