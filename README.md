@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/jguimera-securitycopilotmcpserver)
+
 # Security Copilot and Sentinel MCP Server
 
 A Python-based MCP server using FastMCP library that provides integration with Microsoft Security Copilot and Microsoft Sentinel using Azure Identity Authentication.
