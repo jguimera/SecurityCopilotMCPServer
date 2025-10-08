@@ -9,6 +9,7 @@ This project implements an MCP server that enables:
 - Running KQL queries against Microsoft Sentinel
 - Uploading/Updating Microsoft Security Copilot skillsets/plugins
 - Running prompts and skills in Microsoft Security Copilot
+- Retrieving Microsoft Secure Score control profiles from Graph API
 
 The server acts as a bridge between development environments and Microsoft Security Copilot, allowing for testing, deployment, and execution of skills and plugins. It uses SSE as transport layer for the MCP server.
 There are many use cases for the current integration. One of the most interesting ones is to support the development, test and deployment of Security Copilot KQL Skills. 
@@ -22,6 +23,7 @@ There are many use cases for the current integration. One of the most interestin
   - List existing skillsets/plugins
   - Upload new or update existing skillsets/plugins
   - Run prompts or skills within Security Copilot
+- **Microsoft Graph API Integration**: Retrieve Microsoft Secure Score control profiles
 - **Authentication Support**: Multiple authentication methods including interactive browser, client secret, and managed identity
 ## Roadmap
 The next features will include: 
@@ -85,6 +87,7 @@ The MCP server provides the following tools:
 2. **get_skillsets**: List skillsets in Security Copilot
 3. **upload_plugin**: Upload or update a skillset/plugin
 4. **run_prompt**: Run a prompt or skill in Security Copilot
+5. **get_secure_score_controls**: Retrieve Microsoft Secure Score control profiles from Graph API
 
 ### MCP Client Config for Cursor
 You can use this MCP server from the Client of your choice. In this repo you can find intructions and config files for Cursor.
