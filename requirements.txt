@@ -5,3 +5,4 @@ msgraph-sdk
 python-dotenv
 pandas
 fastmcp
+requests

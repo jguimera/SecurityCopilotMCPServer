@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from azure.identity import InteractiveBrowserCredential, ClientSecretCredential, DefaultAzureCredential  
 from SecurityCopilotClient import SecurityCopilotClient
-from SentinelClient import SentinelClient 
+from SentinelClient import SentinelClient
+from GraphClient import GraphClient
 import logging
 
 # Configure logging
@@ -19,6 +20,7 @@ mcp = FastMCP('MicrosoftSecurityCopilot-server')
 
 securitycopilot_client = None
 sentinel_client = None
+graph_client = None
 
 @mcp.tool()
 def run_sentinel_query(query: str) -> str:
@@ -100,6 +102,21 @@ def run_prompt(prompt_type: str = "Prompt", content: str = None, skill_name: str
     except Exception as e:
         return f"Error processing prompt: {str(e)}"
 
+@mcp.tool()
+def get_secure_score_controls() -> str:
+    """
+    Retrieve the list of Microsoft Secure Score control profiles from Graph API.
+    
+    Returns:
+        List of secure score control profiles with their details
+    """
+    print("[+] Getting Microsoft Secure Score control profiles from Graph API")
+    try:
+        global graph_client
+        return graph_client.get_secure_score_controls()
+    except Exception as e:
+        return f"Error getting secure score controls: {str(e)}"
+
 def run_tests():
     """Run test queries to verify functionality."""
     print("[+] Running Sentinel Test")
@@ -127,6 +144,12 @@ def run_tests():
         print("[+] Security Copilot Skillsets Test executed successfully")
     else:
         print("[+] Security Copilot Skillsets Test failed")
+    print("[+] Running Microsoft Secure Score Controls Test")
+    secure_score_result = get_secure_score_controls()
+    if secure_score_result["status"] == "success":
+        print(f"[+] Microsoft Secure Score Controls Test executed successfully - Retrieved {secure_score_result['count']} controls")
+    else:
+        print("[+] Microsoft Secure Score Controls Test failed")
 def auth(auth_type):  
     """  
     Authenticate with Azure using different credential types based on the provided auth_type.  
@@ -154,7 +177,7 @@ def create_clients(auth_credential):
     """  
     Create clients to external platforms using environment variables.  
     """  
-    global securitycopilot_client, sentinel_client
+    global securitycopilot_client, sentinel_client, graph_client
     
     if securitycopilot_client is None:
         securitycopilot_client = SecurityCopilotClient(auth_credential)
@@ -165,7 +188,11 @@ def create_clients(auth_credential):
         workspaceName=os.getenv('SENTINEL_WORKSPACE_NAME')
         workspace_id=os.getenv('SENTINEL_WORKSPACE_ID')
         sentinel_client = SentinelClient(auth_credential,subscriptionId,resourceGroupName,workspaceName,workspace_id)
-    return securitycopilot_client, sentinel_client
+    
+    if graph_client is None:
+        graph_client = GraphClient(auth_credential)
+    
+    return securitycopilot_client, sentinel_client, graph_client
 
 if __name__ == "__main__":
     # Parse command line arguments
